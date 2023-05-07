@@ -60,12 +60,18 @@ def path_elevation(graph, path):
 	
 	return total_elevation
 
-def nearest_node(g, lat, long):
+def nearest_node(g, x, y):
     # Find the nearest node to the given coordinates
-    return ox.nearest_nodes(g, lat, long)
+    return ox.nearest_nodes(g, x, y)
 
 def node_to_coordinates(G, node):
-    return (G.nodes[node]["lat"], G.nodes[node]["long"])
+    return (G.nodes[node]['x'], G.nodes[node]['y'])
+
+def path_nodes_to_coordinates(G, path):
+    coord_path = []
+    for node in path:
+        coord_path.append(node_to_coordinates(G, node))
+    return coord_path
 
 def path_coordinates(G, path):
     coord_list = []
