@@ -18,7 +18,7 @@ build/
 docs/_build/
 .vscode
 __pycache__
-
+cache
 # Coverage reports
 htmlcov/
 .coverage
