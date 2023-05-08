@@ -15,6 +15,7 @@ gunicorn==20.1.0
 idna==3.4
 itsdangerous==2.1.2
 Jinja2==3.1.2
+joblib==1.2.0
 kiwisolver==1.4.4
 MarkupSafe==2.1.2
 matplotlib==3.7.1
@@ -30,8 +31,11 @@ pyproj==3.5.0
 python-dateutil==2.8.2
 pytz==2023.3
 requests==2.29.0
+scikit-learn==1.2.2
+scipy==1.10.1
 shapely==2.0.1
 six==1.16.0
+threadpoolctl==3.1.0
 tzdata==2023.3
 urllib3==1.26.15
 Werkzeug==2.3.3
