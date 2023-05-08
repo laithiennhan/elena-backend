@@ -127,7 +127,7 @@ def dijkstra_path(graph, start, end, percent, maximize):
             while current_node:
                 path.append(current_node)
                 current_node = predecessors[current_node]
-            return (path[::-1], shortest_path_length, path_elevation(graph, path))
+            return (path[::-1], shortest_path_length, path_elevation(graph, path[::-1]))
 
         # Check the neighboring nodes
         for curr, neighbor, data in graph.edges(current_node, data=True):
