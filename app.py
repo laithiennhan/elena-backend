@@ -1,6 +1,6 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import osmnx as ox
-
+import json
 import OSM_utils 
 import algorithm
 
@@ -9,8 +9,14 @@ app = Flask(__name__)
 @app.route('/get_path', methods=['GET','POST'])
 def get_path():
     data = request.get_json()
+    start = data['start']
+    end = data['end']
+    maximize_minimize = data['maximize_minimize']
+    percent = data['percent']
     
-    return "Temp"
+    response = jsonify({})
+        
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)

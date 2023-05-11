@@ -47,7 +47,9 @@ def get_path(city, state, start, destination, is_walk, percent, maximize):
     
     path_coord = algorithm.path_nodes_to_coordinates(G, path)
     
-    return path_coord, shortest_path_length, total_elevation
+    path_length = algorithm.path_length(G, path)
+    
+    return path_coord, path_length, shortest_path_length, total_elevation
     
     
     
