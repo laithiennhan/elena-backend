@@ -122,12 +122,20 @@ def dijkstra_path(graph, start, end, percent, maximize):
 
         # If we reached the goal, reconstruct the path and return it
         if current_node == end:
-            print("here")
-            path = []
-            while current_node:
-                path.append(current_node)
-                current_node = predecessors[current_node]
-            return (path[::-1], shortest_path_length, path_elevation(graph, path[::-1]))
+            # Edge case: final node's total elevation equals another
+            
+            next_cost, next_node = heapq.heappop(p_queue)
+            
+            if next_cost == current_cost:
+                heapq.heappush(p_queue, (current_cost, current_node))
+                current_node = next_node
+                current_cost = next_cost
+            else:
+                path = []
+                while current_node:
+                    path.append(current_node)
+                    current_node = predecessors[current_node]
+                return (path[::-1], shortest_path_length, path_elevation(graph, path[::-1]))
 
         # Check the neighboring nodes
         for curr, neighbor, data in graph.edges(current_node, data=True):
