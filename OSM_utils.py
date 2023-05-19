@@ -10,7 +10,7 @@ def populate_elevation(graph):
 		graph,
 		api_key="",
 		max_locations_per_batch=100,
-		pause_duration=0.02,
+		pause_duration=0.001,
 		precision=3,
 		url_template=url,
 	)
