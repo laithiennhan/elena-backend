@@ -3,15 +3,15 @@ import networkx as nx
 import heapq
 
 def elevation_gain(graph, start, end):
-    """ Calculate the elevation gain between two nodes
+    """ Calculate the elevation gain between start and end nodes. Return 0 if elevation gained is negative.
 
     Args:
-        graph (NetworkX graph): Graph that contains 2 nodes
+        graph (NetworkX graph): Graph containing 2 nodes
         start (_type_): _description_
         end (_type_): _description_
 
     Returns:
-        _type_: _description_
+        float: Elevation gain between start and end nodes. If end node has lower elevation, return 0.
     """
     ele = graph.nodes[end]['elevation'] - graph.nodes[start]['elevation']
     return max(0, ele)
@@ -20,12 +20,12 @@ def distance(graph, node1, node2):
     """Distance between two nodes
 
     Args:
-        graph (_type_): _description_
+        graph (NetworkX graph): Graph containing 2 nodes
         node1 (_type_): _description_
         node2 (_type_): _description_
 
     Returns:
-        _type_: _description_
+        float: _description_
     """
     return graph.edges[node1, node2, 0]['length']
 
@@ -62,7 +62,8 @@ def nearest_node(g, x, y):
     return ox.nearest_nodes(g, x, y)
 
 def node_to_coordinates(G, node):
-    return (G.nodes[node]['x'], G.nodes[node]['y'])
+    # Lat - long 
+    return [G.nodes[node]['y'], G.nodes[node]['x']]
 
 def path_nodes_to_coordinates(G, path):
     coord_path = []
@@ -75,6 +76,9 @@ def path_coordinates(G, path):
     for node in path:
         coord_list.append(node_to_coordinates(G, node))
     return coord_list
+
+def get_all_routes(G, start, end):
+    return nx.simple_paths.all_simple_paths(G, start, end)
 
 def dijkstra_path(graph, start, end, percent, maximize):
     """Dijkstra algorithm 
@@ -164,7 +168,7 @@ def dijkstra_path(graph, start, end, percent, maximize):
                 
 
     # If we didn't find a path, return the shortest path
-    return shortest_path, shortest_path, path_elevation(graph, shortest_path)
+    return shortest_path, path_length(graph, shortest_path), path_elevation(graph, shortest_path)
 
 
 
