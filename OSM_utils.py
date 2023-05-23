@@ -2,39 +2,40 @@ import osmnx as ox
 import algorithm
 
 def populate_elevation(graph):
-		
-	# Get elevation data from Open Topo Data
-	url = "https://api.opentopodata.org/v1/aster30m?locations={}&key={}"
-	
-	G = ox.add_node_elevations_google(
-		graph,
-		api_key="",
-		max_locations_per_batch=100,
-		pause_duration=0.001,
-		precision=3,
-		url_template=url,
-	)
-	return G
+        
+    # Get elevation data from Open Topo Data
+    url = "https://api.opentopodata.org/v1/aster30m?locations={}&key={}"
+    
+    G = ox.add_node_elevations_google(
+        graph,
+        api_key="",
+        max_locations_per_batch=100,
+        pause_duration=0.001,
+        precision=4,
+        url_template=url,
+    )
+    return G
 
 def get_graph(city, state, is_walk):
-	# Query to generate graph using OSMNX
-	query = {
-		'city': city,
-		'state': state,
-		'country': 'USA',
-	}
+    # Query to generate graph using OSMNX
     
-	nw_type = "bike"
-	if is_walk:
-		nw_type = "walk"
+    query = {
+        'city': city,
+        'state': state,
+        'country': 'USA',
+    }
+    file_name = f"data/{city}_{state}.pkl"
+    nw_type = "bike"
+    if is_walk:
+        nw_type = "walk"
 
-	graph = ox.graph_from_place(query, network_type=nw_type)
-	
- 	# Add Elevation data to graph
-	
-	graph = populate_elevation(graph)
+    graph = ox.graph_from_place(query, network_type=nw_type)
+    
+     # Add Elevation data to graph
+    
+    graph = populate_elevation(graph)
  
-	return graph
+    return graph
  
 def get_path(city, state, start, destination, is_walk, percent, maximize):
     # Get graph of place
