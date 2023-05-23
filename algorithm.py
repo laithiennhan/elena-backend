@@ -33,8 +33,11 @@ def path_length(graph, path):
     """Return the total distance of a path
 
     Args:
-        graph (_type_): _description_
-        path (_type_): _description_
+        graph (NetworkX graph): Graph containing path
+        path ([int]): list of nodeIds of the path
+    
+    Returns:
+        float: length of the path
     """    
     length = 0
     for i in range(len(path) - 1):
@@ -45,11 +48,11 @@ def path_elevation(graph, path):
     """Calculate total elevation gain in path
 
     Args:
-        graph (_type_): _description_
-        path (_type_): _description_
+        graph (NetworkX graph): Graph containing path
+        path ([int]): list of nodeIds of the path
 
     Returns:
-        _type_: _description_
+        float: total elevation gained along path
     """    
     total_elevation = 0
     for i in range(len(path) - 1):
@@ -84,11 +87,11 @@ def dijkstra_path(graph, start, end, percent, maximize):
     """Dijkstra algorithm 
 
     Args:
-        graph (_type_): _description_
-        start (_type_): _description_
-        end (_type_): _description_
-        percent (_type_): _description_
-        maximize (_type_): _description_
+        graph (networkX graph): Graph
+        start (int): ID of the start node
+        end (int): ID of the end node
+        percent (float): distance constraint percentage
+        maximize (boolean): True if maximize elevation, False otherwise
     """
         
     shortest_path = ox.shortest_path(graph, start, end)
